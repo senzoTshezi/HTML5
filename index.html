@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>HTML5 and Javascript</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <script >
+        window.onload = function(){
+            // getting canvas id 
+            var canvas= document.getElementById('paper'),
+            // getting a place to draw on canvas in 2d inside the canvas 
+            c = canvas.getContext("2d");
+            TWO_PI=Math.PI *2;
+
+            c.fillStyle = "black"; //background color 
+            c.fillRect (0,0, canvas.width, canvas.height);//0,0 = x + y start positions..then paing full width and height 
+
+            // Drawing Square
+            c.fillStyle = "red";
+            c.fillRect (20,20,50,50);
+            c.strokeStyle = "White";//stroke it's  a line 
+            c.lineWidth =10;//thick size of the border 
+            c.strokeRect (20,20,50,50); //4 dimension
+
+            //Drawing lines then join them Togather L shape 
+            c.strokeStyle ="Yellow";// color of our lines 
+            c.lineWidth = 5;// thickness 
+
+            c.beginPath();//starting to draw the Line
+            c.moveTo (100,100); //starting point of the Line 
+            c.lineTo(150,200);// end point of the first line 
+            c.lineTo (200,200); //end point of the second line e 
+            c.lineTo (200,250); //end point of the 3rd line 
+            c.lineTo (100,250); //end point of the 4th line 
+            c.closePath();// from  end of 4th to where we started 
+            c.stroke();
+            c.fill();// fill is going on top of the Stroke 
+
+            c.fillStyle = "White";//text color
+            c.font ="50px Helvetical"; // font size and type 
+            c.fillText("senzo",150,200);// we write text and position
+
+            //Drawing Circle 
+           c.beginPath();
+           c.arc(200,360,50,0,TWO_PI, false); //200, 320= x,y positions .. 50=diameter of circle.. 0,Math.PI *2, start and end of dreawing.. true is direction clockwise or anti-clockwise 
+           c.fill();
+           
+           //Animation 
+           var posX = 0, 
+               posY = 200;//starting of y position
+           setInterval(function(){
+                posX += 3;// incrementing x value
+
+                if (posX >200){
+                    posY +=3; // increment value of y once x value is 200 
+                    posX = 200; //reserting the value of x 
+                }
+
+
+                 c.fillStyle = "rgba(0,0,0,0.09)"; // fading out the rest of the drawinds 
+                 c.fillRect(0,0,canvas.width,canvas.height);// painting with black after black circle 
+
+                c.fillStyle="white"; //reserting Fill
+                c.beginPath();
+                c.arc(posX,posY,50,0,TWO_PI, false); //200, 320= x,y positions .. 50=diameter of circle.. 0,Math.PI *2, start and end of dreawing.. true is direction clockwise or anti-clockwise 
+                c.fill();
+
+           }, 15);//speed
+        //    //Drawing Circle 
+        //    c.beginPath();
+        //    c.arc(200,360,50,0,Math.PI *2, true); //200, 320= x,y positions .. 50=diameter of circle.. 0,Math.PI *2, start and end of dreawing.. true is direction clockwise or anti-clockwise 
+        //    c.fill();
+
+            //Quarter circle
+        //    c.beginPath();
+        //    c.moveTo (400,340);
+        //    c.arc(400,340,50,Math.PI /2, Math.PI, false); //200, 320= x,y positions .. 50=diameter of circle.. 0,Math.PI *2, start and end of dreawing.. true is direction clockwise or anti-clockwise 
+        //    c.fill();
+
+        
+
+
+
+
+        }
+    </script>
+</head>
+<body>
+    <canvas id="paper" width="500" height="500">
+        <!-- to make things work on Canvas you need javascript  -->
+        go get chrome...
+    </canvas>
+</body>
+</html>
